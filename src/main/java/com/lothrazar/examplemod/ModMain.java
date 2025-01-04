@@ -1,4 +1,4 @@
-package com.lothrazar.examplemod;
+/*package com.lothrazar.examplemod;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(ModMain.MODID)
 public class ModMain {
 
-  public static final String MODID = "examplemod";
+  public static final String MODID = "journeymapfogofwar";
   public static final Logger LOGGER = LogManager.getLogger();
 
   public ModMain() {
@@ -32,3 +32,4 @@ public class ModMain {
     //for client side only setup
   }
 }
+*/

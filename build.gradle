@@ -115,18 +115,25 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+  mavenCentral()
   flatDir { dir 'libs' } 
   maven {
     // location of the maven that hosts JEI files
     name = "Progwml6 maven"
     url = 'https://dvs1.progwml6.com/files/maven/'
   }
+  maven { url = 'https://maven.blamejared.com' }    
+  maven { url = 'https://www.cursemaven.com'  }
+  maven {
+    name = "JourneyMap (Public)"
+    url = "https://jm.gserv.me/repository/maven-public/"
+  }
+    // JourneyMap API snapshots are here
+  maven { url = 'https://oss.sonatype.org/content/groups/public/' }
   maven {
   	name = "curios"
     url = 'https://maven.theillusivec4.top/'
   }
-  maven { url = 'https://maven.blamejared.com' }    
-  maven { url = 'https://www.cursemaven.com'  }
 }
 
 dependencies {
@@ -140,10 +147,13 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.neoforged:forge:${mc_version}-${neo_version}"
+    compileOnly fg.deobf(group: 'info.journeymap', name: 'journeymap-api', version: project.journeymap_api_version, changing: true)
+    runtimeOnly fg.deobf("curse.maven:journeymap-${project.jm_project_id}:${project.jm_file_id}")
 
+    //JourneyMap
+    //compileOnly group: "info.journeymap", name: "journeymap-api", version: project.journeymap_api_version, changing: true
 
     //optional integrations
-     
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
@@ -232,9 +242,10 @@ task signJar(type: SignJar, dependsOn: jar) {
     alias = project.findProperty('keyStoreAlias')
     storePass = project.findProperty('keyStorePass')
     keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = jar.archivePath
-    outputFile = jar.archivePath
+    inputFile = jar.archiveFile
+    outputFile = jar.archiveFile
 }
+
 task cleanJar {
   delete 'build/libs'
 }
@@ -242,4 +253,9 @@ task cleanJar {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.compilerArgs += ["-Xdiags:verbose"]
 }
+/*
+tasks.withType(JavaCompile) {
+    options.failOnError(false) //to get around bug about resourcekey<level> and ints
+}*/

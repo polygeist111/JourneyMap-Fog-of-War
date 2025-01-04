@@ -9,18 +9,18 @@ license="${mod_license}"
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
 loaderVersion="${loader_version_range}" #mandatory (26 is current forge version)
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/Lothrazar/ForgeTemplate/issues" #optional
+issueTrackerURL="" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
-modId="examplemod" #mandatory
+modId="journeymapfogofwar" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="${mod_version}" #mandatory
- # A display name for the mod
- 
-displayName="examplemod" #mandatory
+
+# A display name for the mod 
+displayName="JourneyMap: Fog of War" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="https://raw.githubusercontent.com/Lothrazar/ForgeTemplate/trunk/1.20/update.json" #optional
+updateJSONURL="" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI # replace with your website
 displayURL="https://www.curseforge.com/minecraft/mc-mods/_curseslug_"
 
@@ -30,29 +30,34 @@ logoFile="" #optional
 credits="Thanks to forge fml mcp Mojang" #optional
 # A text field displayed in the mod UI
 authors="${mod_authors}" #optional
-# The description text for the mod (multi line!) (#mandatory)
 
+# The description text for the mod (multi line!) (#mandatory)
 description='''
-examplemod by ${mod_authors}
+Adds a networked fog of war overlay for journeymap on pregenerated worlds
+By polygeist111
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
+[[dependencies.journeymapfogofwar]] #optional
     modId="forge" 
     mandatory=true 
     versionRange="${neo_version_range}" 
     ordering="NONE"
     side="BOTH"
-[[dependencies.examplemod]]
+[[dependencies.journeymapfogofwar]]
     modId="minecraft"
     mandatory=true
     versionRange="[${mc_version},)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.examplemod]]
+[[dependencies.journeymapfogofwar]]
     modId="flib"
     mandatory=true
     versionRange="[${flib_version},)"
     ordering="NONE"
     side="BOTH"
-	
-	
+[[dependencies.mymodId]]
+    modId = "journeymap"
+    mandatory = false
+    versionRange = "[5.9.0,)"
+    ordering = "NONE"
+    side = "CLIENT"

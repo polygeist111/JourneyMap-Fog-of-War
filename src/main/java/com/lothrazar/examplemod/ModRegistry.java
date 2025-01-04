@@ -1,4 +1,4 @@
-package com.lothrazar.examplemod;
+/*package com.lothrazar.examplemod;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -21,3 +21,4 @@ public class ModRegistry {
   //    // IForgeRegistry<ContainerType<?>> r = event.getRegistry();
   //  }
 }
+*/

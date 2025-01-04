@@ -1,4 +1,4 @@
-package com.lothrazar.examplemod;
+/*package com.lothrazar.examplemod;
 
 import com.lothrazar.library.config.ConfigTemplate;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -20,3 +20,4 @@ public class ConfigManager extends ConfigTemplate {
     CONFIG.setConfig(setup(ModMain.MODID));
   }
 }
+*/
