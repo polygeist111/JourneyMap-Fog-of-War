@@ -17,6 +17,7 @@ public class JourneymapPlugin implements IClientPlugin
     {
         this.jmApi = jmApi;
         SlimeChunkOverlayHandler.init(jmApi);
+        FogOfWarOverlayHandler.init(jmApi);
     }
 
     @Override

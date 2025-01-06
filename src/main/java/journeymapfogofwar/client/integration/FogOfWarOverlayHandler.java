@@ -7,10 +7,14 @@ import journeymap.client.api.model.ShapeProperties;
 import journeymap.client.api.model.TextProperties;
 import journeymap.client.api.util.PolygonHelper;
 import journeymapfogofwar.JourneymapAdditions;
+import journeymapfogofwar.network.dispatch.ClientNetworkDispatcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.HashMap;
 
@@ -82,27 +86,42 @@ public class FogOfWarOverlayHandler
         jmAPI.show(overlay);
     }
 
-    public void remove(ChunkPos chunkPos) {
+    public void remove(ChunkPos chunkPos, String discoverer) {
         //came with a !
-        if (fowChunkOverlays.containsKey(chunkPos))
-        {
+        //if (fowChunkOverlays.containsKey(chunkPos))
+        //{
+            //fowChunkOverlays.put(chunkPos);
             PolygonOverlay overlay = fowChunkOverlays.remove(chunkPos);
             if (overlay != null)
             {
                 jmAPI.remove(overlay);
             }
+        //}
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRespawn( PlayerEvent.PlayerRespawnEvent event) {
+        Player pe = event.getEntity();
+        Level warudo = pe.level();
+        if (warudo.isClientSide()) {
+            ClientNetworkDispatcher.sendMapSyncRequest();
         }
+        //System.out.println("\n\n\n #### player has respawn " + ", " + warudo.isClientSide() + "\n\n\n" );
+        //PlayerEvent$Clone
     }
 }
 
 //change this to be the handler for FoW
 /*
  * THE PLAN
- * store explored map on the server
- * when players load in, sync their locally stored one to the server
- * anytime a chunk is added to the explored map, send that data to all online players
- * when a chunk is called up that is not in the server map, add it and remove the overlay
- * consider adding configurable range (e.g. six chunks)
- * overworld first, then make sure it works on all three dimensions
- * add config to support slime overlay toggle
+ * store explored map on the server x
+ * when players load in, change dimensions, or respawn, sync their locally stored one to the server
+ * anytime a chunk is added to the explored map, send that data to all online players x (currently only sends to original caller I think)
+ * when a chunk is called up that is not in the server map, add it and remove the overlay x
+ * consider adding configurable range (e.g. six chunks) x not currently referencing config, but there is a distance check
+ * overworld first, then make sure it works on all three dimensions x ow
+ * add config to support slime overlay toggle, distance threshold
+ * consider world border overlay
+ * 
+ * look into switching to overlay with holes
  */

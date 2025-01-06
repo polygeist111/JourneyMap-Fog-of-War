@@ -70,5 +70,9 @@ public class SavedExplorationMap extends SavedData{
             return new ChunkPos(posX, posZ);
         }
 
+        public HashMap<ChunkPos, String> getMapSync() {
+            HashMap<ChunkPos, String> clone = (HashMap<ChunkPos, String>) exploredChunks.clone();
+            return clone;
+        }
     
 }

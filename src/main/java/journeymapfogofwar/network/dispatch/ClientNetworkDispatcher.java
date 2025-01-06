@@ -1,7 +1,10 @@
 package journeymapfogofwar.network.dispatch;
 
+import java.util.HashMap;
+
 import journeymapfogofwar.network.PacketRegistry;
 import journeymapfogofwar.network.packet.ChunkInfoPacket;
+import journeymapfogofwar.network.packet.MapSyncPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.ChunkPos;
 
@@ -13,6 +16,13 @@ public class ClientNetworkDispatcher
         if (Minecraft.getInstance().getConnection() != null)
         {
             PacketRegistry.REGISTRY.sendToServer(new ChunkInfoPacket(true, chunkPos, false));
+        }
+    }
+
+    public static void sendMapSyncRequest() {
+        // might be null if player is not fully logged in.
+        if (Minecraft.getInstance().getConnection() != null) {
+            PacketRegistry.REGISTRY.sendToServer(new MapSyncPacket(new HashMap<ChunkPos, String>()));
         }
     }
 }

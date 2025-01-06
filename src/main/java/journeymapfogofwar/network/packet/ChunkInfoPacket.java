@@ -14,6 +14,7 @@ public class ChunkInfoPacket
 {
 
     private ChunkPos chunkPos;
+    private String discoverer;
     private Boolean slimeChunk;
     private Boolean isRevealed = false;
 
@@ -22,6 +23,7 @@ public class ChunkInfoPacket
         this.slimeChunk = slimeChunk;
         this.chunkPos = chunkPos;
         this.isRevealed = isRevealed;
+        this.discoverer = "";
     }
 
     public ChunkInfoPacket(FriendlyByteBuf buf)
@@ -65,6 +67,10 @@ public class ChunkInfoPacket
 
     public Boolean isRevealed() {
         return isRevealed;
+    }
+
+    public String getDiscoverer() {
+        return discoverer;
     }
 
     public static void handle(ChunkInfoPacket packet, Supplier<NetworkEvent.Context> ctx)

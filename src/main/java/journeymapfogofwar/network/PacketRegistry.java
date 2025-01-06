@@ -1,7 +1,7 @@
 package journeymapfogofwar.network;
 
 import journeymapfogofwar.JourneymapAdditions;
-import journeymapfogofwar.network.packet.ChunkInfoPacket;
+import journeymapfogofwar.network.packet.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.simple.SimpleChannel;
 
@@ -22,7 +22,8 @@ public class PacketRegistry
                 .networkProtocolVersion(() -> MOD_VERSION)
                 .simpleChannel();
 
-        REGISTRY.registerMessage(0, ChunkInfoPacket.class, ChunkInfoPacket::encode, ChunkInfoPacket::new, ChunkInfoPacket::handle);
+                REGISTRY.registerMessage(0, ChunkInfoPacket.class, ChunkInfoPacket::encode, ChunkInfoPacket::new, ChunkInfoPacket::handle);
+                REGISTRY.registerMessage(1, MapSyncPacket.class, MapSyncPacket::encode, MapSyncPacket::new, MapSyncPacket::handle);
     }
 
     public static PacketRegistry getInstance()
