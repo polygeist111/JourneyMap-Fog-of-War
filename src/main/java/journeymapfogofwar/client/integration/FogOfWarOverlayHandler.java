@@ -98,7 +98,7 @@ public class FogOfWarOverlayHandler
             }
         //}
     }
-
+    /*
     @SubscribeEvent
     public static void onPlayerRespawn( PlayerEvent.PlayerRespawnEvent event) {
         Player pe = event.getEntity();
@@ -108,7 +108,7 @@ public class FogOfWarOverlayHandler
         }
         //System.out.println("\n\n\n #### player has respawn " + ", " + warudo.isClientSide() + "\n\n\n" );
         //PlayerEvent$Clone
-    }
+    }*/
 }
 
 //change this to be the handler for FoW

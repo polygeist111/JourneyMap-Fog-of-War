@@ -80,6 +80,7 @@ public class ChunkInfoPacket
             if (ctx.get().getDirection().getReceptionSide().isServer())
             {   
                 //return the chunk info packet to the original client
+                JourneymapAdditions.getLogger().info("Passing packet info to server dispatcher");
                 ServerNetworkDispatcher.sendChunkInfoPacket(ctx.get().getSender(), packet.chunkPos);
             }
             else

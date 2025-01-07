@@ -19,6 +19,7 @@ import java.util.HashMap;
 import journeymapfogofwar.JourneymapAdditions;
 import journeymapfogofwar.network.PacketRegistry;
 import journeymapfogofwar.network.SavedExplorationMap;
+import journeymapfogofwar.network.TestDataPersistence;
 import journeymapfogofwar.network.packet.*;
 
 public class ServerNetworkDispatcher
@@ -26,15 +27,24 @@ public class ServerNetworkDispatcher
     private static MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     public static void sendChunkInfoPacket(ServerPlayer player, ChunkPos chunkPos)
     {
+
+        JourneymapAdditions.getLogger().info("Returning packet info from server dispatcher");
         //LevelChunk chunk = player.server.getLevel(null)
         SavedExplorationMap.accessMap(server);
         CompoundTag tag = new CompoundTag();
         SavedExplorationMap map = SavedExplorationMap.load(tag);
-
+        
         LevelChunk chunk = player.level().getChunk(chunkPos.x, chunkPos.z);
         ChunkPos playerPos = player.chunkPosition();
+        JourneymapAdditions.getLogger().info("got player chunk pos");
+        JourneymapAdditions.getLogger().info(playerPos.toString());
         //distance to check
         Boolean isRevealed = map.isExplored(chunkPos);
+        JourneymapAdditions.getLogger().info("revealed bool set");
+
+
+        
+        JourneymapAdditions.getLogger().info("sending chunk info packet from server to client: discovered = " + isRevealed);
         if (!isRevealed) {
             if (Math.sqrt(Math.pow(chunkPos.x - playerPos.x, 2) + Math.pow(chunkPos.z - playerPos.z, 2)) <= 6) {
                 map.exploreChunk(chunkPos, player);

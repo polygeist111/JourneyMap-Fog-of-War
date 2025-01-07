@@ -19,9 +19,11 @@ import journeymapfogofwar.network.PacketRegistry;
 import journeymapfogofwar.network.packet.ChunkInfoPacket;
 
 public class SavedExplorationMap extends SavedData{
+        private static SavedExplorationMap savedMap = null;
         private HashMap<ChunkPos, String> exploredChunks; //ChunkPos, name of player who discovered it
 
         public Boolean isExplored(ChunkPos pos) {
+            JourneymapAdditions.getLogger().info(exploredChunks.containsKey(pos));
             return exploredChunks.containsKey(pos);
         }
 
@@ -31,7 +33,11 @@ public class SavedExplorationMap extends SavedData{
         }
 
         public static SavedExplorationMap create() {
-            return new SavedExplorationMap();
+            if (savedMap == null) {
+                savedMap = new SavedExplorationMap();
+
+            }
+            return savedMap;
         }
 
         public static SavedExplorationMap load(CompoundTag tag) {

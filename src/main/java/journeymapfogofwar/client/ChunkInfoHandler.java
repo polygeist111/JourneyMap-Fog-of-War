@@ -14,9 +14,12 @@ public class ChunkInfoHandler
     {
         try
         {
+            JourneymapAdditions.getLogger().info("handling chunk info packet on the client side");
+
             // handle slimechunks as called from server
             if (packet.isSlimeChunk())
             {
+                JourneymapAdditions.getLogger().info("slime chunk found");
                 SlimeChunkOverlayHandler.getInstance().addChunk(packet.getChunkPos());
             }
             //handle unexplored chunks as called from server
